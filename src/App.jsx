@@ -2,19 +2,16 @@ import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
-import HeroSection from "./assets/Components/Hero/Hero";
-import Header from "./components/Header";
+import HeroSection from "./assets/Components/Hero/Hero.jsx";
+import Header from "./components/Header.jsx";
 
 function App() {
   const [count, setCount] = useState(0);
 
   return (
     <>
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
-
-      <div className="p-10 m-10 bg-orange-100">
-        <p>hello from yash</p>
-      </div>
+      <Header />
+      <HeroSection />
     </>
   );
 }
