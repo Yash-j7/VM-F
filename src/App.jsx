@@ -2,6 +2,7 @@ import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
+import HeroSection from "./assets/Components/Hero/Hero";
 import Header from "./components/Header";
 
 function App() {
@@ -9,7 +10,11 @@ function App() {
 
   return (
     <>
-      <Header />
+      <h1 className="text-3xl font-bold underline">Hello world!</h1>
+
+      <div className="p-10 m-10 bg-orange-100">
+        <p>hello from yash</p>
+      </div>
     </>
   );
 }
