@@ -39,7 +39,7 @@ const HeroSection = () => {
   };
 
   return (
-    <div className="absolute h-[500px] w-screen lg:w-full left-0 right-0 overflow-hidden bg-gradient-to-r from-gray-200 to-white flex items-center justify-center">
+    <div className=" h-[500px] w-screen lg:w-full left-0 right-0 overflow-hidden bg-gradient-to-r from-gray-200 to-white flex items-center justify-center">
       {/* Left Arrow */}
       <button
         onClick={prevSlide}
