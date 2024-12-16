@@ -82,6 +82,7 @@ function Header() {
             <li className="hover:text-red-600 cursor-pointer">Raw Material</li>
             <li className="hover:text-red-600 cursor-pointer">Plotters</li>
             <li className="hover:text-red-600 cursor-pointer">Spare Parts</li>
+            <li className="hover:text-red-600 cursor-pointer">Blogs</li>
             <li className="hover:text-red-600 cursor-pointer">Our Story</li>
             <li className="hover:text-red-600 cursor-pointer">Contact Us</li>
           </ul>
