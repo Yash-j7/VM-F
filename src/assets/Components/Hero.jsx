@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
-import heatpress from "../../Pictures/heatpress and sublimation.jpg";
-import dtf from "../../Pictures/dtf.jpg";
-import vin from "../../Pictures/optical vinyl.jpg";
-import Fiber from "../../Pictures/fiber.jpg";
-import engraving from "../../Pictures/engraving.jpg";
+import dtf from "../Pictures/dtf.jpg";
+import vin from "../Pictures/optical vinyl.jpg";
+import Fiber from "../Pictures/fiber.jpg";
+import engraving from "../Pictures/engraving.jpg";
 const HeroSection = () => {
   const slides = [
     {
@@ -40,7 +39,7 @@ const HeroSection = () => {
   };
 
   return (
-    <div className="absolute h-[900px] w-screen lg:w-full left-0 right-0 overflow-hidden bg-gradient-to-r from-gray-200 to-white flex items-center justify-center">
+    <div className="relative h-[900px] w-screen lg:w-full left-0 right-0 overflow-hidden bg-gradient-to-r from-gray-200 to-white flex items-center justify-center">
       {/* Left Arrow */}
       <button
         onClick={prevSlide}
