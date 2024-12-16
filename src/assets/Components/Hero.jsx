@@ -22,10 +22,10 @@ const HeroSection = () => {
       image: Fiber,
     },
     {
-        title: "Engraving Cutter",
-        buttonText: "Read More",
-        image: engraving,
-      },
+      title: "Engraving Cutter",
+      buttonText: "Read More",
+      image: engraving,
+    },
   ];
 
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -39,7 +39,7 @@ const HeroSection = () => {
   };
 
   return (
-    <div className="relative h-[900px] w-screen lg:w-full left-0 right-0 overflow-hidden bg-gradient-to-r from-gray-200 to-white flex items-center justify-center">
+    <div className="relative h-[500px] w-screen lg:w-full left-0 right-0 overflow-hidden bg-gradient-to-r from-gray-200 to-white flex items-center justify-center">
       {/* Left Arrow */}
       <button
         onClick={prevSlide}
@@ -50,13 +50,13 @@ const HeroSection = () => {
 
       {/* Slides */}
       <div className="relative w-full h-full flex items-center justify-center">
-        <div className="relative flex items-center justify-between w-full lg:w-[90%] h-auto lg:h-[80%] bg-white shadow-2xl rounded-lg overflow-hidden">
+        <div className="relative flex items-center justify-between w-full lg:w-[90%] h-auto lg:h-[80%] bg-black shadow-2xl rounded-lg overflow-hidden">
           {/* Image Section */}
           <div className="relative w-full h-full flex items-center justify-center group">
             <img
               src={slides[currentSlide].image}
               alt={slides[currentSlide].title}
-              className="w-full h-full object-cover"
+              className="w-full h-[500px] p-5 object-cover"
             />
             {/* Text Overlay */}
             <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-8 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
