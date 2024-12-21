@@ -56,7 +56,7 @@ const HeroSection = () => {
             <img
               src={slides[currentSlide].image}
               alt={slides[currentSlide].title}
-              className="w-full h-[500px] p-5 object-cover"
+              className="w-full h-[200px] md:h-[500px] p-5 object-cover"
             />
             {/* Text Overlay */}
             <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-8 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
