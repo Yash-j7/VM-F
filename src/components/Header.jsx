@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import logo from "../assets/VISION MEDIA RAW LOGO 1.png";
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -64,8 +65,8 @@ function Header() {
           } absolute top-16 left-0 w-full bg-white border-t border-gray-200 md:bg-transparent md:static md:flex md:items-center md:space-x-6 z-10`}
         >
           <ul className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:ml-10 md:space-x-4 p-4 md:p-0">
-            <li className="hover:text-red-600 cursor-pointer">Home</li>
-            <li className="hover:text-red-600 cursor-pointer">About Us</li>
+            <li className="hover:text-red-600 cursor-pointer"><Link to='/'>Home</Link></li>
+            <li className="hover:text-red-600 cursor-pointer"><Link to='/about-us'>About Us</Link></li>
             <li className="relative group">
               <summary className="cursor-pointer hover:text-red-600">
                 Machine
