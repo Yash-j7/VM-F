@@ -4,13 +4,13 @@ import boxes from "../assets/Pictures/plotter_files/boxes.jpg";
 function RawMaterialsDesc() {
   return (
     <div className="md:flex bg-rose-700 p-5 mt-[100px]">
-      <div className="flex w-[50%] mt-3 ml-24">
+      <div className="flex flex-col items-center sm:flex-row sm:items-start w-full md:w-[50%] mt-3 md:ml-24">
         <img className="h-[100px] w-[100px]" src={boxes} alt="" />
-        <h1 className="text-5xl font-bold text-white mt-6 ml-4">
+        <h1 className="text-5xl font-bold text-white mt-3 sm:mt-0 sm:ml-4">
           Raw Materials
         </h1>
       </div>
-      <div className=" md:w-[50%] text-white text-sm">
+      <div className=" md:w-[50%] text-white text-sm mt-5 md:mt-0">
         <h1>
           We specialize in providing a wide range of materials that can be
           customized to create unique and personalized items. Whether you’re

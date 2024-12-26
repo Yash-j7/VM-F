@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import { useSwipeable } from "react-swipeable";
 import dtf from "../Pictures/dtf.jpg";
 import vin from "../Pictures/optical vinyl.jpg";
 import Fiber from "../Pictures/fiber.jpg";
 import engraving from "../Pictures/engraving.jpg";
+
 const HeroSection = () => {
   const slides = [
     {
@@ -38,12 +40,22 @@ const HeroSection = () => {
     setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
   };
 
+  // Swipe Handlers
+  const handlers = useSwipeable({
+    onSwipedLeft: nextSlide,
+    onSwipedRight: prevSlide,
+    trackMouse: true, // Allow mouse swipes as well
+  });
+
   return (
-    <div className="relative h-[500px] w-screen lg:w-full left-0 right-0 overflow-hidden bg-gradient-to-r from-gray-200 to-white flex items-center justify-center">
-      {/* Left Arrow */}
+    <div
+      className="relative h-[500px] w-screen lg:w-full left-0 right-0 overflow-hidden bg-gradient-to-r from-gray-200 to-white flex items-center justify-center"
+      {...handlers} // Attach swipe handlers
+    >
+      {/* Left Arrow (Visible only on large screens) */}
       <button
         onClick={prevSlide}
-        className="absolute left-5 z-10 bg-red-600 text-white p-3 rounded-full hover:bg-red-700 transition"
+        className="hidden lg:block absolute left-5 z-10 bg-red-600 text-white p-3 rounded-full hover:bg-red-700 transition"
       >
         <FiChevronLeft size={24} />
       </button>
@@ -71,10 +83,10 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Right Arrow */}
+      {/* Right Arrow (Visible only on large screens) */}
       <button
         onClick={nextSlide}
-        className="absolute right-5  bg-red-600 text-white p-3 rounded-full hover:bg-red-700 transition"
+        className="hidden lg:block absolute right-5 bg-red-600 text-white p-3 rounded-full hover:bg-red-700 transition"
       >
         <FiChevronRight size={24} />
       </button>
