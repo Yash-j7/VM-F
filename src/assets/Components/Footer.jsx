@@ -10,7 +10,7 @@ const Footer = () => {
           <img
             src={logo} // Replace with your logo path
             alt="Vision Media Logo"
-            className="w-32"
+            className="w-32 bg-white"
           />
           <p className="text-gray-400">
             Welcome to Vision Media, Your One-Stop Destination For High-Quality Sublimation Products.
