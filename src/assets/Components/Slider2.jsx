@@ -71,19 +71,19 @@ function Slider2() {
     <div className="flex flex-wrap justify-center gap-6 p-4">
       {/* Slider 1 */}
       <div className="w-full sm:w-1/4 mb-6 sm:mb-0">
-        <h2 className="text-center font-bold text-2xl mb-4">Slider 1</h2>
+        <h2 className="text-center font-bold text-2xl mb-4"></h2>
         {renderSlider(slider1Products)}
       </div>
 
       {/* Slider 2 */}
       <div className="w-full sm:w-1/4 mb-6 sm:mb-0">
-        <h2 className="text-center font-bold text-2xl mb-4">Slider 2</h2>
+        <h2 className="text-center font-bold text-2xl mb-4"></h2>
         {renderSlider(slider2Products)}
       </div>
 
       {/* Slider 3 */}
       <div className="w-full sm:w-1/4">
-        <h2 className="text-center font-bold text-2xl mb-4">Slider 3</h2>
+        <h2 className="text-center font-bold text-2xl mb-4"></h2>
         {renderSlider(slider3Products)}
       </div>
     </div>
