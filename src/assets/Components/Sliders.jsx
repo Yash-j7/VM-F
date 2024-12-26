@@ -4,9 +4,6 @@ import { Navigation, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/autoplay";
-<<<<<<< HEAD
-import plt from "../Pictures/plotter_files/1-V-48-PLOTTER-1200x1200.jpg";
-=======
 import plt from '../Pictures/plotter_files/1-V-48-PLOTTER-1200x1200.jpg';
 import plt2 from '../Pictures/plotter_files/v-24.jpg';
 import plt3 from '../Pictures/plotter_files/v-24 2.jpg';
@@ -17,75 +14,23 @@ import vh482 from '../Pictures/plotter_files/optical 2.jpg';
 
 
 
->>>>>>> 65283dad9948c381cd796568298627e409145a7d
-
 const Sliders = () => {
   const slider1Products = [
     { name: "Plotter V-48", price: "₹72,000.00", image: plt },
-<<<<<<< HEAD
-    {
-      name: "Plotter V-49",
-      price: "₹75,000.00",
-      image: "https://via.placeholder.com/300",
-    },
-    {
-      name: "Plotter V-50",
-      price: "₹78,000.00",
-      image: "https://via.placeholder.com/300",
-    },
-  ];
-
-  const slider2Products = [
-    {
-      name: "Plotter D-48",
-      price: "₹86,000.00",
-      image: "https://via.placeholder.com/300",
-    },
-    {
-      name: "Plotter D-49",
-      price: "₹89,000.00",
-      image: "https://via.placeholder.com/300",
-    },
-    {
-      name: "Plotter D-50",
-      price: "₹92,000.00",
-      image: "https://via.placeholder.com/300",
-    },
-  ];
-
-  const slider3Products = [
-    {
-      name: "Plotter VH-48",
-      price: "₹98,000.00",
-      image: "https://via.placeholder.com/300",
-    },
-    {
-      name: "Plotter VH-49",
-      price: "₹1,00,000.00",
-      image: "https://via.placeholder.com/300",
-    },
-    {
-      name: "Plotter VH-50",
-      price: "₹1,02,000.00",
-      image: "https://via.placeholder.com/300",
-    },
-=======
     { name: "Plotter V-49", price: "₹45,000.00", image: plt2},
     { name: "Plotter V-50", price: "₹45,000.00", image:plt3 },
   ];
 
   const slider2Products = [
     { name: "Plotter D-48", price: "₹55,000.00", image: dplt },
-    { name: "Plotter D-49", price: "₹55,000.00", image:dplt2},
-    ,
+    { name: "Plotter D-49", price: "₹55,000.00", image: dplt2 },
   ];
-
+  
   const slider3Products = [
-    { name: "Plotter VH-48", price: "₹98,000.00", image: vh48},
-    { name: "Plotter VH-49", price: "₹98,000.00", image:vh482 },
-    ,
->>>>>>> 65283dad9948c381cd796568298627e409145a7d
+    { name: "Plotter VH-48", price: "₹98,000.00", image: vh48 },
+    { name: "Plotter VH-49", price: "₹98,000.00", image: vh482 },
   ];
+  
 
   // Reusable Slider Component
   const renderSlider = (products) => (

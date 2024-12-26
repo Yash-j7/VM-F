@@ -1,5 +1,5 @@
 import React from "react";
-import Machine from "../assets/Pictures/plotter_files/heat-press-printer.png";
+import Machine from "../assets/Pictures/plotter_files/heatpres.jpg";
 // C:\Users\yashj\OneDrive\Desktop\vision-media\src\assets\Pictures\plotter_files\heat-press-printer.png
 function MachineDesc() {
   return (

@@ -1,5 +1,5 @@
 import React from "react";
-import boxes from "../assets/Pictures/plotter_files/boxes.png";
+import boxes from "../assets/Pictures/plotter_files/boxes.jpg";
 // C:\Users\yashj\OneDrive\Desktop\vision-media\src\assets\Pictures\plotter_files\heat-press-printer.png
 function RawMaterialsDesc() {
   return (
