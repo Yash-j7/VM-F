@@ -12,37 +12,33 @@ import dplt2 from '../Pictures/plotter_files/d-24 2.jpg';
 import vh48 from '../Pictures/plotter_files/optical.jpg';
 import vh482 from '../Pictures/plotter_files/optical 2.jpg';
 
-
-
 const Sliders = () => {
   const slider1Products = [
     { name: "Plotter V-48", price: "₹72,000.00", image: plt },
-    { name: "Plotter V-49", price: "₹45,000.00", image: plt2},
-    { name: "Plotter V-50", price: "₹45,000.00", image:plt3 },
+    { name: "Plotter V-49", price: "₹45,000.00", image: plt2 },
+    { name: "Plotter V-50", price: "₹45,000.00", image: plt3 },
   ];
 
   const slider2Products = [
     { name: "Plotter D-48", price: "₹55,000.00", image: dplt },
     { name: "Plotter D-49", price: "₹55,000.00", image: dplt2 },
   ];
-  
+
   const slider3Products = [
     { name: "Plotter VH-48", price: "₹98,000.00", image: vh48 },
     { name: "Plotter VH-49", price: "₹98,000.00", image: vh482 },
   ];
-  
 
-  // Reusable Slider Component
   const renderSlider = (products) => (
     <Swiper
-      navigation={true} // Enable navigation arrows
-      loop={true} // Loop back to the first slide
+      navigation={true}
+      loop={true}
       autoplay={{
-        delay: 3000, // Autoplay delay in milliseconds (3 seconds)
-        disableOnInteraction: false, // Continue autoplay even after user interaction
+        delay: 3000,
+        disableOnInteraction: false,
       }}
-      modules={[Navigation, Autoplay]} // Import required modules
-      spaceBetween={20} // Reduced space between slides
+      modules={[Navigation, Autoplay]}
+      spaceBetween={20}
       slidesPerView={1}
       className="w-full"
     >
@@ -51,7 +47,7 @@ const Sliders = () => {
           <div
             className="relative w-full"
             style={{
-              paddingTop: "100%" /* 1:1 aspect ratio */,
+              paddingTop: "100%", /* 1:1 aspect ratio */
               position: "relative",
             }}
           >
@@ -70,7 +66,7 @@ const Sliders = () => {
 
             {/* Button at the Bottom */}
             <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
-              <button className="bg-red-500 text-white px-6 py-2 rounded-lg hover:bg-red-600">
+              <button className="bg-red-500 text-white px-1 py-1 text-sm rounded-lg hover:bg-red-600 sm:px-6 sm:py-2 sm:text-base">
                 Add To Cart
               </button>
             </div>
@@ -81,22 +77,22 @@ const Sliders = () => {
   );
 
   return (
-    <div className="flex justify-center gap-6 p-4">
+    <div className="flex flex-wrap justify-center gap-6 p-4">
       {/* Slider 1 */}
-      <div className="w-1/4">
-        <h2 className="text-center font-bold text-2xl mb-4"></h2>
+      <div className="w-full sm:w-1/4 mb-6 sm:mb-0">
+        <h2 className="text-center font-bold text-2xl mb-4">Slider 1</h2>
         {renderSlider(slider1Products)}
       </div>
 
       {/* Slider 2 */}
-      <div className="w-1/4">
-        <h2 className="text-center font-bold text-2xl mb-4"></h2>
+      <div className="w-full sm:w-1/4 mb-6 sm:mb-0">
+        <h2 className="text-center font-bold text-2xl mb-4">Slider 2</h2>
         {renderSlider(slider2Products)}
       </div>
 
       {/* Slider 3 */}
-      <div className="w-1/4">
-        <h2 className="text-center font-bold text-2xl mb-4"></h2>
+      <div className="w-full sm:w-1/4">
+        <h2 className="text-center font-bold text-2xl mb-4">Slider 3</h2>
         {renderSlider(slider3Products)}
       </div>
     </div>
