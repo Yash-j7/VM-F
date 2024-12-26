@@ -43,7 +43,7 @@ const HeroSection = () => {
       {/* Left Arrow */}
       <button
         onClick={prevSlide}
-        className="absolute left-5  bg-red-600 text-white p-3 rounded-full hover:bg-red-700 transition"
+        className="absolute left-5 z-10 bg-red-600 text-white p-3 rounded-full hover:bg-red-700 transition"
       >
         <FiChevronLeft size={24} />
       </button>

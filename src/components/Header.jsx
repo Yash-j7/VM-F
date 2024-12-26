@@ -62,7 +62,7 @@ function Header() {
         <nav
           className={`${
             menuOpen ? "block" : "hidden"
-          } absolute top-16 left-0 w-full bg-white border-t border-gray-200 md:bg-transparent md:static md:flex md:items-center md:space-x-6 z-10`}
+          } absolute top-16 left-0 w-full bg-white border-t border-gray-200 md:bg-transparent md:static md:flex md:items-center md:space-x-6 z-20`}
         >
           <ul className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:ml-10 md:space-x-4 p-4 md:p-0">
             <li className="hover:text-red-600 cursor-pointer"><Link to='/'>Home</Link></li>
