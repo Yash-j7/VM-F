@@ -65,8 +65,12 @@ function Header() {
           } absolute top-16 left-0 w-full bg-white border-t border-gray-200 md:bg-transparent md:static md:flex md:items-center md:space-x-6 z-20`}
         >
           <ul className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:ml-10 md:space-x-4 p-4 md:p-0">
-            <li className="hover:text-red-600 cursor-pointer"><Link to='/'>Home</Link></li>
-            <li className="hover:text-red-600 cursor-pointer"><Link to='/about-us'>About Us</Link></li>
+            <li className="hover:text-red-600 cursor-pointer">
+              <Link to="/">Home</Link>
+            </li>
+            <li className="hover:text-red-600 cursor-pointer">
+              <Link to="/about-us">About Us</Link>
+            </li>
             <li className="relative group">
               <summary className="cursor-pointer hover:text-red-600">
                 Machine
@@ -91,8 +95,8 @@ function Header() {
 
         {/* Call-to-Action Button */}
         <div className="hidden md:block">
-          <button className="bg-red-600 hover:bg-red-700 p-3 rounded-md text-[15px] text-white">
-            Get Quote Now
+          <button className="bg-red-600 hover:bg-red-700 p-3 rounded-md text-[20px] text-white">
+            Cart
           </button>
         </div>
       </div>
