@@ -15,7 +15,7 @@ import PlottersDesc from "./components/PlottersDesc.jsx";
 import MachineDesc from "./components/MachineDesc.jsx";
 import RawMaterialsDesc from "./components/RawMaterialsDesc";
 import GoogleReviews from "./components/GoogleReviews.jsx";
-
+import Newsletter from "./components/NewsLetter.jsx"
 import Footer from "./assets/Components/Footer.jsx";
 import AboutUs from "./assets/Components/About.jsx";
 import Blog from "./assets/Components/Blog.jsx"; // Add this only if used in the alternate route
@@ -42,7 +42,7 @@ function App() {
       <MachineDesc />
       <Slider2 />
       <GoogleReviews />
-      
+      <Newsletter />
     </>
   }
 />
