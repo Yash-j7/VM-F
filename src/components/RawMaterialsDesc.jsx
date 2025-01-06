@@ -7,7 +7,7 @@ function RawMaterialsDesc() {
       <div className="flex flex-col items-center sm:flex-row sm:items-start w-full md:w-[50%] mt-3 md:ml-24">
         <img className="h-[100px] w-[100px]" src={boxes} alt="" />
         <h1 className="text-5xl font-bold text-white mt-3 sm:mt-0 sm:ml-4">
-          Raw Materials
+          DTF
         </h1>
       </div>
       <div className=" md:w-[50%] text-white text-sm mt-5 md:mt-0">
