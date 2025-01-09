@@ -110,7 +110,7 @@ const Footer = () => {
             <ul className="space-y-2">
               <li>📞 <a href="tel:+918100280400" className="hover:text-red-500">+91 8100280400</a></li>
               <li>📱 <a href="tel:+919831463859" className="hover:text-red-500">+91 9831463859</a></li>
-              <li>✉️ <a href="mailto:sales@visiongifting.com" className="hover:text-red-500">sales@visiongifting.com</a></li>
+              <li>✉️ <a href="mailto:sales@visiongifting.com" className="hover:text-red-500">sales@visionmediaonline.in</a></li>
             </ul>
           </div>
 

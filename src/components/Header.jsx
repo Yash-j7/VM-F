@@ -12,13 +12,13 @@ function Header() {
         <div>📩 sales@visionmediaonline.in</div>
         <div className="hidden md:flex space-x-4">
           <a href="#" className="hover:opacity-80">
-            FB
+            Youtube
           </a>
           <a href="#" className="hover:opacity-80">
-            Twitter
+            Whatsapp
           </a>
           <a href="#" className="hover:opacity-80">
-            LinkedIn
+            Instagram
           </a>
         </div>
       </div>
@@ -84,9 +84,9 @@ function Header() {
               </ul>
             </li>
             <li className="hover:text-red-600 cursor-pointer">DTF</li>
-            <li className="hover:text-red-600 cursor-pointer">Raw Material</li>
+            <li className="hover:text-red-600 cursor-pointer">Sublimation Products</li>
             <li className="hover:text-red-600 cursor-pointer">Plotters</li>
-            <li className="hover:text-red-600 cursor-pointer">Spare Parts</li>
+            <li className="hover:text-red-600 cursor-pointer">Lasers</li>
             <li className="hover:text-red-600 cursor-pointer">Blogs</li>
             <li className="hover:text-red-600 cursor-pointer">Our Story</li>
             <li className="hover:text-red-600 cursor-pointer">Contact Us</li>
