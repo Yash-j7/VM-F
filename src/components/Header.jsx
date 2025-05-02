@@ -25,6 +25,21 @@ function Header() {
 
   const topLevel = buildCategoryTree(categories);
 
+  // Track which submenus are open at each level
+  const [openSubMenus, setOpenSubMenus] = useState({});
+
+  // Helper to handle submenu open/close robustly
+  const handleSubMenuEnter = (id, level) => {
+    setOpenSubMenus((prev) => ({ ...prev, [level]: id }));
+  };
+  const handleSubMenuLeave = (level) => {
+    setOpenSubMenus((prev) => {
+      const updated = { ...prev };
+      delete updated[level];
+      return updated;
+    });
+  };
+
   const handleLogout = () => {
     setAuth({
       ...auth,
@@ -35,36 +50,30 @@ function Header() {
     toast.success("Logged out successfully");
   };
 
-  // Recursive dropdown for subcategories with enhanced styling
   const renderSubMenu = (children, level = 1) => {
     if (!children || children.length === 0) return null;
     return (
       <ul
-        className={`absolute left-full top-0 bg-white border border-gray-200 rounded-md shadow-lg min-w-[200px] z-50 transform transition-all duration-300 ease-in-out ${level > 2 ? 'ml-2' : ''}`}
-        style={{
-          display: 'block',
-          opacity: 0,
-          transform: 'translateX(0)',
-          animation: 'fadeIn 0.3s ease-in-out forwards'
-        }}
+        className={`absolute left-full top-0 bg-white border border-gray-200 rounded-md shadow-lg min-w-[200px] z-[1000] transition-all duration-200 ${level > 2 ? 'ml-0' : ''}`}
+        onMouseEnter={() => handleSubMenuEnter(openSubMenus[level - 1], level)}
+        onMouseLeave={() => handleSubMenuLeave(level)}
       >
         {children.map((sub) => (
           <li
             key={sub._id}
-            className="relative group hover:bg-gray-50 transition-colors duration-200"
-            onMouseEnter={() => setHoveredSub(sub._id)}
-            onMouseLeave={() => setHoveredSub(null)}
+            className="relative group hover:bg-gray-50"
+            onMouseEnter={() => handleSubMenuEnter(sub._id, level)}
+            onMouseLeave={() => handleSubMenuLeave(level + 1)}
           >
-            <Link
-              to={`/category/${sub.slug}`}
-              className="block px-4 py-2 text-gray-800 hover:text-red-600 transition-colors duration-200 flex items-center justify-between"
-            >
-              <span>{sub.name}</span>
+            <div className="flex items-center justify-between">
+              <Link to={`/category/${sub.slug}`} className="block px-4 py-2 text-gray-800 hover:text-red-600 flex-grow">
+                {sub.name}
+              </Link>
               {sub.children && sub.children.length > 0 && (
-                <span className="text-gray-400 ml-2">▶</span>
+                <span className="text-gray-400 ml-2 mr-2">▶</span>
               )}
-            </Link>
-            {sub.children && sub.children.length > 0 && hoveredSub === sub._id && renderSubMenu(sub.children, level + 1)}
+            </div>
+            {sub.children && sub.children.length > 0 && openSubMenus[level] === sub._id && renderSubMenu(sub.children, level + 1)}
           </li>
         ))}
       </ul>
@@ -171,11 +180,10 @@ function Header() {
 
         {/* Navigation Links */}
         <nav
-          className={`${menuOpen ? "block" : "hidden"
-            } absolute top-16 z-[2000px] p-5 md:text-xl left-[50%] bg-white border-gray-200 md:bg-transparent md:static md:flex md:items-center md:space-x-6`}
+          className={`${menuOpen ? "block" : "hidden"} absolute top-16 z-[2000px] p-5 md:text-xl left-[50%] bg-white border-gray-200 md:bg-transparent md:static md:flex md:items-center md:space-x-6`}
         >
           <ul className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6">
-            <li className="hover:text-red-600 cursor-pointer transition-colors duration-200">
+            <li className="hover:text-red-600 cursor-pointer">
               <Link to="/">Home</Link>
             </li>
 
@@ -183,51 +191,45 @@ function Header() {
             {topLevel.map((cat) => (
               <li
                 key={cat._id}
-                className="relative group z-10"
-                onMouseEnter={() => setHoveredCat(cat._id)}
-                onMouseLeave={() => setHoveredCat(null)}
+                className="relative group"
+                onMouseEnter={() => handleSubMenuEnter(cat._id, 0)}
+                onMouseLeave={() => handleSubMenuLeave(0)}
               >
                 <div className="flex items-center space-x-1">
                   <Link
                     to={`/category/${cat.slug}`}
-                    className="hover:text-red-600 transition-colors duration-200"
+                    className="hover:text-red-600"
                   >
                     {cat.name}
                   </Link>
                   {cat.children && cat.children.length > 0 && (
-                    <span className="text-gray-400 text-sm transition-transform duration-200 group-hover:rotate-180">▼</span>
+                    <span className="text-gray-400 text-sm">▼</span>
                   )}
                 </div>
 
                 {/* Enhanced Subcategories dropdown */}
-                {cat.children && cat.children.length > 0 && hoveredCat === cat._id && (
+                {cat.children && cat.children.length > 0 && openSubMenus[0] === cat._id && (
                   <ul
-                    className="absolute left-0 top-full bg-white border border-gray-200 rounded-md shadow-lg min-w-[200px] z-50 transform transition-all duration-300 ease-in-out"
-                    style={{
-                      display: 'block',
-                      opacity: 0,
-                      transform: 'translateY(0)',
-                      animation: 'slideDown 0.3s ease-in-out forwards'
-                    }}
+                    className="absolute left-0 top-full bg-white border border-gray-200 rounded-md shadow-lg min-w-[200px] z-[1000] transition-all duration-200"
+                    onMouseEnter={() => handleSubMenuEnter(cat._id, 0)}
+                    onMouseLeave={() => handleSubMenuLeave(0)}
                   >
                     {cat.children.map((sub) => (
                       <li
                         key={sub._id}
-                        className="relative group hover:bg-gray-50 transition-colors duration-200"
-                        onMouseEnter={() => setHoveredSub(sub._id)}
-                        onMouseLeave={() => setHoveredSub(null)}
+                        className="relative group hover:bg-gray-50"
+                        onMouseEnter={() => handleSubMenuEnter(sub._id, 1)}
+                        onMouseLeave={() => handleSubMenuLeave(1)}
                       >
-                        <Link
-                          to={`/category/${sub.slug}`}
-                          className="block px-4 py-2 text-gray-800 hover:text-red-600 transition-colors duration-200 flex items-center justify-between"
-                        >
-                          <span>{sub.name}</span>
+                        <div className="flex items-center justify-between">
+                          <Link to={`/category/${sub.slug}`} className="block px-4 py-2 text-gray-800 hover:text-red-600 flex-grow">
+                            {sub.name}
+                          </Link>
                           {sub.children && sub.children.length > 0 && (
-                            <span className="text-gray-400 ml-2">▶</span>
+                            <span className="text-gray-400 ml-2 mr-2">▶</span>
                           )}
-                        </Link>
-                        {/* Sub-subcategories dropdown */}
-                        {sub.children && sub.children.length > 0 && hoveredSub === sub._id && renderSubMenu(sub.children, 2)}
+                        </div>
+                        {sub.children && sub.children.length > 0 && openSubMenus[1] === sub._id && renderSubMenu(sub.children, 2)}
                       </li>
                     ))}
                   </ul>
@@ -235,13 +237,13 @@ function Header() {
               </li>
             ))}
 
-            <li className="hover:text-red-600 cursor-pointer transition-colors duration-200">
+            <li className="hover:text-red-600 cursor-pointer">
               <Link to="/category">All categories</Link>
             </li>
-            <li className="hover:text-red-600 cursor-pointer transition-colors duration-200">
+            <li className="hover:text-red-600 cursor-pointer">
               <Link to="/about-us">About Us</Link>
             </li>
-            <li className="hover:text-red-600 cursor-pointer transition-colors duration-200">Blogs</li>
+            <li className="hover:text-red-600 cursor-pointer">Blogs</li>
           </ul>
         </nav>
 

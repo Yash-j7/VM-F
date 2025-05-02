@@ -13,26 +13,40 @@ function buildCategoryTree(categories, parent = null) {
 
 function Categories() {
   const categories = useCategory();
-  const [expanded, setExpanded] = useState(null);
+  const [expanded, setExpanded] = useState({});
   const topLevel = buildCategoryTree(categories);
 
   const handleExpand = (id) => {
-    setExpanded(expanded === id ? null : id);
+    setExpanded(prev => ({
+      ...prev,
+      [id]: !prev[id]
+    }));
   };
 
   const renderSubcategories = (children, level = 1) => {
     if (!children || children.length === 0) return null;
     return (
-      <div className={`ml-${level * 4} mt-2`}> {/* Indent for subcategories */}
+      <div className={`ml-${level * 4} mt-2`}>
         {children.map((sub) => (
-          <div key={sub._id}>
-            <div className="flex items-center cursor-pointer hover:text-blue-700" onClick={() => handleExpand(sub._id)}>
-              <span className="mr-2">{sub.children && sub.children.length > 0 ? (expanded === sub._id ? "▼" : "►") : "•"}</span>
-              <Link to={`/category/${sub.slug}`} className="text-base font-medium">
+          <div key={sub._id} className="mb-2">
+            <div className="flex items-center cursor-pointer hover:text-blue-700">
+              <span
+                className="mr-2 cursor-pointer"
+                onClick={() => handleExpand(sub._id)}
+              >
+                {sub.children && sub.children.length > 0 ?
+                  (expanded[sub._id] ? "▼" : "►") :
+                  "•"
+                }
+              </span>
+              <Link
+                to={`/category/${sub.slug}`}
+                className="text-base font-medium hover:text-blue-700"
+              >
                 {sub.name}
               </Link>
             </div>
-            {expanded === sub._id && renderSubcategories(sub.children, level + 1)}
+            {expanded[sub._id] && renderSubcategories(sub.children, level + 1)}
           </div>
         ))}
       </div>
@@ -47,13 +61,24 @@ function Categories() {
       <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-6">
         {topLevel.map((cat) => (
           <div key={cat._id} className="mb-4 border-b pb-2">
-            <div className="flex items-center cursor-pointer hover:text-blue-700" onClick={() => handleExpand(cat._id)}>
-              <span className="mr-2 text-lg">{cat.children && cat.children.length > 0 ? (expanded === cat._id ? "▼" : "►") : "•"}</span>
-              <Link to={`/category/${cat.slug}`} className="text-lg font-semibold text-gray-900 hover:text-blue-700">
+            <div className="flex items-center cursor-pointer hover:text-blue-700">
+              <span
+                className="mr-2 cursor-pointer"
+                onClick={() => handleExpand(cat._id)}
+              >
+                {cat.children && cat.children.length > 0 ?
+                  (expanded[cat._id] ? "▼" : "►") :
+                  "•"
+                }
+              </span>
+              <Link
+                to={`/category/${cat.slug}`}
+                className="text-lg font-semibold text-gray-900 hover:text-blue-700"
+              >
                 {cat.name}
               </Link>
             </div>
-            {expanded === cat._id && renderSubcategories(cat.children)}
+            {expanded[cat._id] && renderSubcategories(cat.children)}
           </div>
         ))}
       </div>
