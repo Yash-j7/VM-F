@@ -21,7 +21,7 @@ function DetailedProduct() {
   const getProducts = async () => {
     try {
       const { data } = await axios.get(
-        `http://localhost:8080/api/v1/product/get-product/${params.slug}`
+        `https://vm-b.onrender.com/api/v1/product/get-product/${params.slug}`
       );
 
       if (data?.product) {
@@ -42,7 +42,7 @@ function DetailedProduct() {
   const getRelatedProducts = async (pid, cid) => {
     try {
       const { data } = await axios.get(
-        `http://localhost:8080/api/v1/product/related-product/${pid}/${cid}`
+        `https://vm-b.onrender.com/api/v1/product/related-product/${pid}/${cid}`
       );
 
       if (data?.products) {
@@ -70,8 +70,15 @@ function DetailedProduct() {
       label: `${prod.name} (x${bd.quantity})`,
       price: prod.price * bd.quantity,
       discount: bd.discount,
-      display: ((prod.price * bd.quantity) * (1 - bd.discount / 100)).toLocaleString("en-US", { style: "currency", currency: "INR" }),
-      original: (prod.price * bd.quantity).toLocaleString("en-US", { style: "currency", currency: "INR" }),
+      display: (
+        prod.price *
+        bd.quantity *
+        (1 - bd.discount / 100)
+      ).toLocaleString("en-US", { style: "currency", currency: "INR" }),
+      original: (prod.price * bd.quantity).toLocaleString("en-US", {
+        style: "currency",
+        currency: "INR",
+      }),
       quantity: bd.quantity,
     }));
   };
@@ -79,7 +86,9 @@ function DetailedProduct() {
     const productToAdd = {
       ...prod,
       variant: variant.id,
-      price: variant.discount ? Math.round(variant.price * (1 - variant.discount / 100)) : variant.price,
+      price: variant.discount
+        ? Math.round(variant.price * (1 - variant.discount / 100))
+        : variant.price,
       quantity: variant.quantity || 1,
       bulkDiscount: variant.discount || 0,
     };
@@ -100,8 +109,14 @@ function DetailedProduct() {
       label: `${prod.name} (x${qty})`,
       price: prod.price * qty,
       discount,
-      display: price.toLocaleString("en-US", { style: "currency", currency: "INR" }),
-      original: (prod.price * qty).toLocaleString("en-US", { style: "currency", currency: "INR" }),
+      display: price.toLocaleString("en-US", {
+        style: "currency",
+        currency: "INR",
+      }),
+      original: (prod.price * qty).toLocaleString("en-US", {
+        style: "currency",
+        currency: "INR",
+      }),
       quantity: qty,
     });
   };
@@ -126,7 +141,9 @@ function DetailedProduct() {
           <h2>{prod?.category?.name}</h2>
           {/* Price List Table */}
           <div className="my-6">
-            <h3 className="text-lg font-bold mb-2">Price List (Inclusive of Discounts)</h3>
+            <h3 className="text-lg font-bold mb-2">
+              Price List (Inclusive of Discounts)
+            </h3>
             <table className="w-full border text-left">
               <thead>
                 <tr className="bg-gray-100">
@@ -139,22 +156,43 @@ function DetailedProduct() {
               <tbody>
                 <tr>
                   <td className="p-2 border">1</td>
-                  <td className="p-2 border">{prod.price?.toLocaleString("en-US", { style: "currency", currency: "INR" })}</td>
+                  <td className="p-2 border">
+                    {prod.price?.toLocaleString("en-US", {
+                      style: "currency",
+                      currency: "INR",
+                    })}
+                  </td>
                   <td className="p-2 border">-</td>
-                  <td className="p-2 border">{prod.price?.toLocaleString("en-US", { style: "currency", currency: "INR" })}</td>
+                  <td className="p-2 border">
+                    {prod.price?.toLocaleString("en-US", {
+                      style: "currency",
+                      currency: "INR",
+                    })}
+                  </td>
                 </tr>
-                {prod.bulkDiscounts && prod.bulkDiscounts.map((bd, idx) => {
-                  const original = prod.price * bd.quantity;
-                  const discounted = original * (1 - bd.discount / 100);
-                  return (
-                    <tr key={idx}>
-                      <td className="p-2 border">{bd.quantity}</td>
-                      <td className="p-2 border">{original.toLocaleString("en-US", { style: "currency", currency: "INR" })}</td>
-                      <td className="p-2 border">{bd.discount}%</td>
-                      <td className="p-2 border">{discounted.toLocaleString("en-US", { style: "currency", currency: "INR" })}</td>
-                    </tr>
-                  );
-                })}
+                {prod.bulkDiscounts &&
+                  prod.bulkDiscounts.map((bd, idx) => {
+                    const original = prod.price * bd.quantity;
+                    const discounted = original * (1 - bd.discount / 100);
+                    return (
+                      <tr key={idx}>
+                        <td className="p-2 border">{bd.quantity}</td>
+                        <td className="p-2 border">
+                          {original.toLocaleString("en-US", {
+                            style: "currency",
+                            currency: "INR",
+                          })}
+                        </td>
+                        <td className="p-2 border">{bd.discount}%</td>
+                        <td className="p-2 border">
+                          {discounted.toLocaleString("en-US", {
+                            style: "currency",
+                            currency: "INR",
+                          })}
+                        </td>
+                      </tr>
+                    );
+                  })}
               </tbody>
             </table>
           </div>
@@ -176,22 +214,50 @@ function DetailedProduct() {
               <div className="flex items-center justify-between border p-3 rounded-lg mb-2">
                 <div>
                   <div className="font-semibold">{prod.name} (1 Pc)</div>
-                  <span className="font-bold">{prod.price?.toLocaleString("en-US", { style: "currency", currency: "INR" })}</span>
+                  <span className="font-bold">
+                    {prod.price?.toLocaleString("en-US", {
+                      style: "currency",
+                      currency: "INR",
+                    })}
+                  </span>
                 </div>
-                <Button type="primary" onClick={() => handleAddToCart({ id: "single", label: prod.name + " (1 Pc)", price: prod.price, discount: 0, quantity: 1 })}>
+                <Button
+                  type="primary"
+                  onClick={() =>
+                    handleAddToCart({
+                      id: "single",
+                      label: prod.name + " (1 Pc)",
+                      price: prod.price,
+                      discount: 0,
+                      quantity: 1,
+                    })
+                  }
+                >
                   Add
                 </Button>
               </div>
               {/* Bulk options from admin */}
               {bulkOptions.map((variant) => (
-                <div key={variant.id} className="flex items-center justify-between border p-3 rounded-lg mb-2">
+                <div
+                  key={variant.id}
+                  className="flex items-center justify-between border p-3 rounded-lg mb-2"
+                >
                   <div>
                     <div className="font-semibold">{variant.label}</div>
-                    <span className="text-red-500 font-bold mr-2">{variant.display}</span>
-                    <span className="line-through text-gray-400">{variant.original}</span>
-                    <span className="ml-2 text-green-600">{variant.discount}% OFF</span>
+                    <span className="text-red-500 font-bold mr-2">
+                      {variant.display}
+                    </span>
+                    <span className="line-through text-gray-400">
+                      {variant.original}
+                    </span>
+                    <span className="ml-2 text-green-600">
+                      {variant.discount}% OFF
+                    </span>
                   </div>
-                  <Button type="primary" onClick={() => handleAddToCart(variant)}>
+                  <Button
+                    type="primary"
+                    onClick={() => handleAddToCart(variant)}
+                  >
                     Add
                   </Button>
                 </div>
@@ -204,24 +270,38 @@ function DetailedProduct() {
                   placeholder="Enter quantity (e.g. 7, 15, 100)"
                   className="border rounded p-1 w-1/2"
                   value={manualQty}
-                  onChange={e => setManualQty(e.target.value)}
+                  onChange={(e) => setManualQty(e.target.value)}
                 />
-                <Button type="primary" onClick={handleManualAdd}>Add</Button>
-                {manualQty && (() => {
-                  const qty = parseInt(manualQty);
-                  const found = prod.bulkDiscounts?.find((b) => Number(b.quantity) === qty);
-                  if (qty > 0) {
-                    const discount = found ? found.discount : 0;
-                    const price = prod.price * qty * (1 - discount / 100);
-                    return (
-                      <span className="ml-2">
-                        {discount > 0 && <span className="text-green-600">{discount}% OFF</span>}
-                        <span className="ml-2 font-bold">{price.toLocaleString("en-US", { style: "currency", currency: "INR" })}</span>
-                      </span>
+                <Button type="primary" onClick={handleManualAdd}>
+                  Add
+                </Button>
+                {manualQty &&
+                  (() => {
+                    const qty = parseInt(manualQty);
+                    const found = prod.bulkDiscounts?.find(
+                      (b) => Number(b.quantity) === qty
                     );
-                  }
-                  return null;
-                })()}
+                    if (qty > 0) {
+                      const discount = found ? found.discount : 0;
+                      const price = prod.price * qty * (1 - discount / 100);
+                      return (
+                        <span className="ml-2">
+                          {discount > 0 && (
+                            <span className="text-green-600">
+                              {discount}% OFF
+                            </span>
+                          )}
+                          <span className="ml-2 font-bold">
+                            {price.toLocaleString("en-US", {
+                              style: "currency",
+                              currency: "INR",
+                            })}
+                          </span>
+                        </span>
+                      );
+                    }
+                    return null;
+                  })()}
               </div>
             </div>
           </Modal>
@@ -241,7 +321,7 @@ function DetailedProduct() {
                 cover={
                   <img
                     alt={p.name}
-                    src={`http://localhost:8080/api/v1/product/product-photo/${p._id}`}
+                    src={`https://vm-b.onrender.com/api/v1/product/product-photo/${p._id}`}
                   />
                 }
               >

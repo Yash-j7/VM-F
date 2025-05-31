@@ -22,12 +22,14 @@ function UpdateProduct() {
   const [quantity, setQuantity] = useState("");
   const [shipping, setShipping] = useState("");
   const [id, setId] = useState("");
-  const [bulkDiscounts, setBulkDiscounts] = useState([{ quantity: '', discount: '' }]);
+  const [bulkDiscounts, setBulkDiscounts] = useState([
+    { quantity: "", discount: "" },
+  ]);
 
   const getSingleProduct = async () => {
     try {
       const { data } = await axios.get(
-        `http://localhost:8080/api/v1/product/get-product/${params.slug}`,
+        `https://vm-b.onrender.com/api/v1/product/get-product/${params.slug}`,
         {
           headers: { Authorization: `Bearer ${auth?.token}` },
         }
@@ -40,7 +42,11 @@ function UpdateProduct() {
       setQuantity(data.product.quantity);
       setShipping(data.product.shipping);
       setId(data.product._id);
-      setBulkDiscounts(data.product.bulkDiscounts && data.product.bulkDiscounts.length > 0 ? data.product.bulkDiscounts : [{ quantity: '', discount: '' }]);
+      setBulkDiscounts(
+        data.product.bulkDiscounts && data.product.bulkDiscounts.length > 0
+          ? data.product.bulkDiscounts
+          : [{ quantity: "", discount: "" }]
+      );
     } catch (error) {
       console.error("Error loading product:", error);
     }
@@ -54,7 +60,7 @@ function UpdateProduct() {
   const getAllCategory = async () => {
     try {
       const { data } = await axios.get(
-        "http://localhost:8080/api/v1/category/get-category",
+        "https://vm-b.onrender.com/api/v1/category/get-category",
         {
           headers: {
             Authorization: auth?.token,
@@ -92,10 +98,13 @@ function UpdateProduct() {
       if (photo) {
         productData.append("photo", photo);
       }
-      productData.append("bulkDiscounts", JSON.stringify(bulkDiscounts.filter(b => b.quantity && b.discount)));
+      productData.append(
+        "bulkDiscounts",
+        JSON.stringify(bulkDiscounts.filter((b) => b.quantity && b.discount))
+      );
 
       const { data } = await axios.put(
-        `http://localhost:8080/api/v1/product/update-product/${id}`,
+        `https://vm-b.onrender.com/api/v1/product/update-product/${id}`,
         productData,
         {
           headers: {
@@ -123,7 +132,7 @@ function UpdateProduct() {
       let answer = window.prompt("Are you sure, you want to delete");
       if (!answer) return;
       const { data } = await axios.delete(
-        `http://localhost:8080/api/v1/product/delete-product/${id}`,
+        `https://vm-b.onrender.com/api/v1/product/delete-product/${id}`,
         {
           headers: {
             Authorization: auth?.token,
@@ -134,7 +143,7 @@ function UpdateProduct() {
 
       toast.success("Product deleted successfully");
       navigate("/dashboard/admin/products");
-      setTimeout(() => { }, 1000);
+      setTimeout(() => {}, 1000);
     } catch (error) {
       console.log(error);
       toast.error("something went wrong in handleDelete");
@@ -245,7 +254,7 @@ function UpdateProduct() {
                   placeholder="Quantity (e.g. 10)"
                   className="border rounded p-1 w-1/2"
                   value={bd.quantity}
-                  onChange={e => {
+                  onChange={(e) => {
                     const arr = [...bulkDiscounts];
                     arr[idx].quantity = e.target.value;
                     setBulkDiscounts(arr);
@@ -258,16 +267,35 @@ function UpdateProduct() {
                   placeholder="Discount %"
                   className="border rounded p-1 w-1/2"
                   value={bd.discount}
-                  onChange={e => {
+                  onChange={(e) => {
                     const arr = [...bulkDiscounts];
                     arr[idx].discount = e.target.value;
                     setBulkDiscounts(arr);
                   }}
                 />
-                <button type="button" onClick={() => setBulkDiscounts(bulkDiscounts.filter((_, i) => i !== idx))} className="text-red-500">Remove</button>
+                <button
+                  type="button"
+                  onClick={() =>
+                    setBulkDiscounts(bulkDiscounts.filter((_, i) => i !== idx))
+                  }
+                  className="text-red-500"
+                >
+                  Remove
+                </button>
               </div>
             ))}
-            <button type="button" onClick={() => setBulkDiscounts([...bulkDiscounts, { quantity: '', discount: '' }])} className="text-blue-500">+ Add Bulk Discount</button>
+            <button
+              type="button"
+              onClick={() =>
+                setBulkDiscounts([
+                  ...bulkDiscounts,
+                  { quantity: "", discount: "" },
+                ])
+              }
+              className="text-blue-500"
+            >
+              + Add Bulk Discount
+            </button>
           </div>
           <div>
             <button

@@ -21,7 +21,7 @@ function CreateCategory() {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:8080/api/v1/category/create-category",
+        "https://vm-b.onrender.com/api/v1/category/create-category",
         { name, parent },
         {
           headers: {
@@ -46,7 +46,7 @@ function CreateCategory() {
   const getAllCategory = async () => {
     try {
       const { data } = await axios.get(
-        "http://localhost:8080/api/v1/category/get-category",
+        "https://vm-b.onrender.com/api/v1/category/get-category",
         {
           headers: {
             Authorization: auth?.token,
@@ -70,7 +70,7 @@ function CreateCategory() {
     e.preventDefault();
     try {
       const { data } = await axios.put(
-        `http://localhost:8080/api/v1/category/update-category/${selected._id}`,
+        `https://vm-b.onrender.com/api/v1/category/update-category/${selected._id}`,
         { name: updatedName, parent: editParent },
         {
           headers: {
@@ -97,7 +97,7 @@ function CreateCategory() {
   const handleDelete = async (categoryId) => {
     try {
       const { data } = await axios.delete(
-        `http://localhost:8080/api/v1/category/delete-category/${categoryId}`,
+        `https://vm-b.onrender.com/api/v1/category/delete-category/${categoryId}`,
         {
           headers: {
             Authorization: auth?.token,
@@ -119,8 +119,8 @@ function CreateCategory() {
   // Helper to build tree data for TreeSelect
   const buildCategoryTree = (categories, parent = null) => {
     return categories
-      .filter(cat => String(cat.parent) === String(parent))
-      .map(cat => ({
+      .filter((cat) => String(cat.parent) === String(parent))
+      .map((cat) => ({
         title: cat.name,
         value: cat._id,
         key: cat._id,
@@ -155,7 +155,7 @@ function CreateCategory() {
                 <TreeSelect
                   style={{ width: 250 }}
                   value={parent}
-                  dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
+                  dropdownStyle={{ maxHeight: 400, overflow: "auto" }}
                   treeData={treeData}
                   placeholder="Select parent category (optional)"
                   treeDefaultExpandAll
@@ -222,8 +222,10 @@ function CreateCategory() {
                   <TreeSelect
                     style={{ width: 250 }}
                     value={editParent}
-                    dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
-                    treeData={treeData.filter(cat => cat.value !== selected?._id)}
+                    dropdownStyle={{ maxHeight: 400, overflow: "auto" }}
+                    treeData={treeData.filter(
+                      (cat) => cat.value !== selected?._id
+                    )}
                     placeholder="Select parent category (optional)"
                     treeDefaultExpandAll
                     allowClear

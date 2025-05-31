@@ -19,13 +19,15 @@ function CreateProduct() {
   const [price, setPrice] = useState("");
   const [quantity, setQuantity] = useState("");
   const [shipping, setShipping] = useState("");
-  const [bulkDiscounts, setBulkDiscounts] = useState([{ quantity: '', discount: '' }]);
+  const [bulkDiscounts, setBulkDiscounts] = useState([
+    { quantity: "", discount: "" },
+  ]);
 
   // Fetch categories from the API
   const getAllCategory = async () => {
     try {
       const { data } = await axios.get(
-        "http://localhost:8080/api/v1/category/get-category",
+        "https://vm-b.onrender.com/api/v1/category/get-category",
         {
           headers: {
             Authorization: auth?.token,
@@ -63,10 +65,13 @@ function CreateProduct() {
       if (photo) {
         productData.append("photo", photo);
       }
-      productData.append("bulkDiscounts", JSON.stringify(bulkDiscounts.filter(b => b.quantity && b.discount)));
+      productData.append(
+        "bulkDiscounts",
+        JSON.stringify(bulkDiscounts.filter((b) => b.quantity && b.discount))
+      );
 
       const { data } = await axios.post(
-        "http://localhost:8080/api/v1/product/create-product",
+        "https://vm-b.onrender.com/api/v1/product/create-product",
         productData,
         {
           headers: {
@@ -201,7 +206,7 @@ function CreateProduct() {
                     placeholder="Quantity (e.g. 10)"
                     className="border rounded p-1 w-1/2"
                     value={bd.quantity}
-                    onChange={e => {
+                    onChange={(e) => {
                       const arr = [...bulkDiscounts];
                       arr[idx].quantity = e.target.value;
                       setBulkDiscounts(arr);
@@ -214,16 +219,37 @@ function CreateProduct() {
                     placeholder="Discount %"
                     className="border rounded p-1 w-1/2"
                     value={bd.discount}
-                    onChange={e => {
+                    onChange={(e) => {
                       const arr = [...bulkDiscounts];
                       arr[idx].discount = e.target.value;
                       setBulkDiscounts(arr);
                     }}
                   />
-                  <button type="button" onClick={() => setBulkDiscounts(bulkDiscounts.filter((_, i) => i !== idx))} className="text-red-500">Remove</button>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setBulkDiscounts(
+                        bulkDiscounts.filter((_, i) => i !== idx)
+                      )
+                    }
+                    className="text-red-500"
+                  >
+                    Remove
+                  </button>
                 </div>
               ))}
-              <button type="button" onClick={() => setBulkDiscounts([...bulkDiscounts, { quantity: '', discount: '' }])} className="text-blue-500">+ Add Bulk Discount</button>
+              <button
+                type="button"
+                onClick={() =>
+                  setBulkDiscounts([
+                    ...bulkDiscounts,
+                    { quantity: "", discount: "" },
+                  ])
+                }
+                className="text-blue-500"
+              >
+                + Add Bulk Discount
+              </button>
             </div>
             <div>
               <button

@@ -21,7 +21,7 @@ function Cart() {
     try {
       const amountInPaise = totalAmount * 100; // Convert to paise
       const res = await axios.post(
-        "http://localhost:8080/api/v1/payment/order",
+        "https://vm-b.onrender.com/api/v1/payment/order",
         { amount: amountInPaise },
         {
           headers: {
@@ -56,7 +56,7 @@ function Cart() {
           }
 
           const verificationRes = await axios.post(
-            "http://localhost:8080/api/v1/payment/verify",
+            "https://vm-b.onrender.com/api/v1/payment/verify",
             response // Send full response object
           );
 

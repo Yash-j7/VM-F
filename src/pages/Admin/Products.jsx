@@ -12,7 +12,7 @@ function Products() {
   const getProducts = async () => {
     try {
       const { data } = await axios.get(
-        "http://localhost:8080/api/v1/product/get-products",
+        "https://vm-b.onrender.com/api/v1/product/get-products",
         {
           headers: {
             Authorization: `Bearer ${auth?.token}`,
