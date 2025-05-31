@@ -51,49 +51,58 @@ function Header() {
 
   return (
     <header className="sticky top-0 z-50 bg-white shadow-sm">
-      {/* Top Bar */}
-      <div className="top flex flex-col sm:flex-row justify-between items-center px-4 py-3 text-sm sm:text-base bg-black text-white">
-        <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-6">
-          <div className="flex items-center gap-2">
-            <span>📞</span>
-            <span>+91 8100280400</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span>📩</span>
-            <span>sales@visionmediaonline.in</span>
+      <div className="top flex flex-row items-center px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-base bg-black text-white">
+        {/* Phone number on left */}
+        <div className="flex-1 flex justify-start">
+          <div className="flex items-center gap-1 sm:gap-2">
+            <span className="hidden sm:inline">📞</span>
+            <span className="truncate">+91 8100280400</span>
           </div>
         </div>
-        {!auth.user ? (
-          <div className="flex items-center gap-3 mt-2 sm:mt-0">
-            <Link
-              to="/login"
-              className="px-4 py-2 border text-white bg-red-700 rounded-md hover:bg-white hover:text-red-700 transition-colors duration-200"
-            >
-              Login
-            </Link>
-            <Link
-              to="/register"
-              className="px-4 py-2 border text-white bg-red-700 rounded-md hover:bg-white hover:text-red-700 transition-colors duration-200"
-            >
-              Register
-            </Link>
-          </div>
-        ) : (
-          <div className="flex items-center gap-3 mt-2 sm:mt-0">
-            <span className="px-4 py-2 text-white bg-red-700 rounded-md">
-              Hello {auth.user.name}
-            </span>
-            <Link
-              onClick={handleLogout}
-              to="/"
-              className="px-4 py-2 text-white bg-red-700 rounded-md hover:bg-white hover:text-red-700 transition-colors duration-200"
-            >
-              Logout
-            </Link>
-          </div>
-        )}
-      </div>
 
+        {/* Email in center */}
+        <div className="flex-1 flex justify-center">
+          <div className="flex items-center gap-1 sm:gap-2">
+            <span className="hidden sm:inline">📩</span>
+            <span className="truncate text-center">
+              sales@visionmediaonline.in
+            </span>
+          </div>
+        </div>
+
+        {/* Auth buttons on right */}
+        <div className="flex-1 flex justify-end">
+          {!auth.user ? (
+            <div className="flex items-center gap-1 sm:gap-3">
+              <Link
+                to="/login"
+                className="px-2 sm:px-4 py-1 sm:py-2 border text-white bg-red-700 rounded-md hover:bg-white hover:text-red-700 transition-colors duration-200 text-xs sm:text-base"
+              >
+                Login
+              </Link>
+              <Link
+                to="/register"
+                className="px-2 sm:px-4 py-1 sm:py-2 border text-white bg-red-700 rounded-md hover:bg-white hover:text-red-700 transition-colors duration-200 text-xs sm:text-base"
+              >
+                Register
+              </Link>
+            </div>
+          ) : (
+            <div className="flex items-center gap-1 sm:gap-3">
+              <span className="px-2 sm:px-4 py-1 sm:py-2 text-white bg-red-700 rounded-md text-xs sm:text-base truncate">
+                Hello {auth.user.name}
+              </span>
+              <Link
+                onClick={handleLogout}
+                to="/"
+                className="px-2 sm:px-4 py-1 sm:py-2 text-white bg-red-700 rounded-md hover:bg-white hover:text-red-700 transition-colors duration-200 text-xs sm:text-base"
+              >
+                Logout
+              </Link>
+            </div>
+          )}
+        </div>
+      </div>
       {/* Navigation Bar */}
       <div className="bottom flex justify-between items-center px-4 py-4">
         {/* Brand Logo */}
