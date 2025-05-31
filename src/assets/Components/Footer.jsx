@@ -128,8 +128,7 @@ const Footer = () => {
 
       {/* Copyright */}
       <div className="bg-red-700 text-center py-3">
-        <p>&copy; Copyright 1988–2023 | All Rights Reserved.</p>
-        <p>Made with ❤️ By Your Creator</p>
+        <p>&copy; Copyright 1988–2026 | All Rights Reserved.</p>
       </div>
     </footer>
   );
