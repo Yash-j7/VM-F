@@ -29,7 +29,7 @@ function CategoryProduct() {
   const getCateProd = async () => {
     try {
       const { data } = await axios.get(
-        `https://vm-b.onrender.com/api/v1/product/product-category/${params.slug}`
+        `http://localhost:8080/api/v1/product/product-category/${params.slug}`
       );
       setProducts(data?.products);
       setCategory(data?.category);
@@ -45,49 +45,28 @@ function CategoryProduct() {
       label: p.name + " (1 Pc)",
       price: p.price,
       discount: 0,
-      display: p.price?.toLocaleString("en-US", {
-        style: "currency",
-        currency: "INR",
-      }),
+      display: p.price?.toLocaleString("en-US", { style: "currency", currency: "INR" }),
     },
     {
       id: "pack",
       label: p.name + " (Pack of 2)",
       price: p.price * 2,
       discount: 0.04, // 4% off
-      display: (p.price * 2 * 0.96).toLocaleString("en-US", {
-        style: "currency",
-        currency: "INR",
-      }),
-      original: (p.price * 2).toLocaleString("en-US", {
-        style: "currency",
-        currency: "INR",
-      }),
+      display: ((p.price * 2) * 0.96).toLocaleString("en-US", { style: "currency", currency: "INR" }),
+      original: (p.price * 2).toLocaleString("en-US", { style: "currency", currency: "INR" }),
     },
   ];
 
   // Generate variant options from selectedProduct.bulkDiscounts
   const getBulkOptions = () => {
-    if (
-      !selectedProduct ||
-      !selectedProduct.bulkDiscounts ||
-      selectedProduct.bulkDiscounts.length === 0
-    )
-      return [];
+    if (!selectedProduct || !selectedProduct.bulkDiscounts || selectedProduct.bulkDiscounts.length === 0) return [];
     return selectedProduct.bulkDiscounts.map((bd) => ({
       id: `bulk_${bd.quantity}`,
       label: `${selectedProduct.name} (x${bd.quantity})`,
       price: selectedProduct.price * bd.quantity,
       discount: bd.discount,
-      display: (
-        selectedProduct.price *
-        bd.quantity *
-        (1 - bd.discount / 100)
-      ).toLocaleString("en-US", { style: "currency", currency: "INR" }),
-      original: (selectedProduct.price * bd.quantity).toLocaleString("en-US", {
-        style: "currency",
-        currency: "INR",
-      }),
+      display: ((selectedProduct.price * bd.quantity) * (1 - bd.discount / 100)).toLocaleString("en-US", { style: "currency", currency: "INR" }),
+      original: (selectedProduct.price * bd.quantity).toLocaleString("en-US", { style: "currency", currency: "INR" }),
       quantity: bd.quantity,
     }));
   };
@@ -96,9 +75,7 @@ function CategoryProduct() {
     const productToAdd = {
       ...selectedProduct,
       variant: variant.id,
-      price: variant.discount
-        ? Math.round(variant.price * (1 - variant.discount / 100))
-        : variant.price,
+      price: variant.discount ? Math.round(variant.price * (1 - variant.discount / 100)) : variant.price,
       quantity: variant.quantity || 1,
       bulkDiscount: variant.discount || 0,
     };
@@ -112,9 +89,7 @@ function CategoryProduct() {
   const handleManualAdd = () => {
     const qty = parseInt(manualQty);
     if (!qty || qty < 1) return;
-    const found = selectedProduct.bulkDiscounts?.find(
-      (b) => Number(b.quantity) === qty
-    );
+    const found = selectedProduct.bulkDiscounts?.find((b) => Number(b.quantity) === qty);
     const discount = found ? found.discount : 0;
     const price = selectedProduct.price * qty * (1 - discount / 100);
     handleAddToCart({
@@ -122,14 +97,8 @@ function CategoryProduct() {
       label: `${selectedProduct.name} (x${qty})`,
       price: selectedProduct.price * qty,
       discount,
-      display: price.toLocaleString("en-US", {
-        style: "currency",
-        currency: "INR",
-      }),
-      original: (selectedProduct.price * qty).toLocaleString("en-US", {
-        style: "currency",
-        currency: "INR",
-      }),
+      display: price.toLocaleString("en-US", { style: "currency", currency: "INR" }),
+      original: (selectedProduct.price * qty).toLocaleString("en-US", { style: "currency", currency: "INR" }),
       quantity: qty,
     });
   };
@@ -215,49 +184,22 @@ function CategoryProduct() {
           {selectedProduct && (
             <div className="flex items-center justify-between border p-3 rounded-lg mb-2">
               <div>
-                <div className="font-semibold">
-                  {selectedProduct.name} (1 Pc)
-                </div>
-                <span className="font-bold">
-                  {selectedProduct.price?.toLocaleString("en-US", {
-                    style: "currency",
-                    currency: "INR",
-                  })}
-                </span>
+                <div className="font-semibold">{selectedProduct.name} (1 Pc)</div>
+                <span className="font-bold">{selectedProduct.price?.toLocaleString("en-US", { style: "currency", currency: "INR" })}</span>
               </div>
-              <Button
-                type="primary"
-                onClick={() =>
-                  handleAddToCart({
-                    id: "single",
-                    label: selectedProduct.name + " (1 Pc)",
-                    price: selectedProduct.price,
-                    discount: 0,
-                    quantity: 1,
-                  })
-                }
-              >
+              <Button type="primary" onClick={() => handleAddToCart({ id: "single", label: selectedProduct.name + " (1 Pc)", price: selectedProduct.price, discount: 0, quantity: 1 })}>
                 Add
               </Button>
             </div>
           )}
           {/* Bulk options from admin */}
           {bulkOptions.map((variant) => (
-            <div
-              key={variant.id}
-              className="flex items-center justify-between border p-3 rounded-lg mb-2"
-            >
+            <div key={variant.id} className="flex items-center justify-between border p-3 rounded-lg mb-2">
               <div>
                 <div className="font-semibold">{variant.label}</div>
-                <span className="text-red-500 font-bold mr-2">
-                  {variant.display}
-                </span>
-                <span className="line-through text-gray-400">
-                  {variant.original}
-                </span>
-                <span className="ml-2 text-green-600">
-                  {variant.discount}% OFF
-                </span>
+                <span className="text-red-500 font-bold mr-2">{variant.display}</span>
+                <span className="line-through text-gray-400">{variant.original}</span>
+                <span className="ml-2 text-green-600">{variant.discount}% OFF</span>
               </div>
               <Button type="primary" onClick={() => handleAddToCart(variant)}>
                 Add
@@ -273,39 +215,24 @@ function CategoryProduct() {
                 placeholder="Enter quantity (e.g. 7, 15, 100)"
                 className="border rounded p-1 w-1/2"
                 value={manualQty}
-                onChange={(e) => setManualQty(e.target.value)}
+                onChange={e => setManualQty(e.target.value)}
               />
-              <Button type="primary" onClick={handleManualAdd}>
-                Add
-              </Button>
-              {manualQty &&
-                (() => {
-                  const qty = parseInt(manualQty);
-                  const found = selectedProduct.bulkDiscounts?.find(
-                    (b) => Number(b.quantity) === qty
+              <Button type="primary" onClick={handleManualAdd}>Add</Button>
+              {manualQty && (() => {
+                const qty = parseInt(manualQty);
+                const found = selectedProduct.bulkDiscounts?.find((b) => Number(b.quantity) === qty);
+                if (qty > 0) {
+                  const discount = found ? found.discount : 0;
+                  const price = selectedProduct.price * qty * (1 - discount / 100);
+                  return (
+                    <span className="ml-2">
+                      {discount > 0 && <span className="text-green-600">{discount}% OFF</span>}
+                      <span className="ml-2 font-bold">{price.toLocaleString("en-US", { style: "currency", currency: "INR" })}</span>
+                    </span>
                   );
-                  if (qty > 0) {
-                    const discount = found ? found.discount : 0;
-                    const price =
-                      selectedProduct.price * qty * (1 - discount / 100);
-                    return (
-                      <span className="ml-2">
-                        {discount > 0 && (
-                          <span className="text-green-600">
-                            {discount}% OFF
-                          </span>
-                        )}
-                        <span className="ml-2 font-bold">
-                          {price.toLocaleString("en-US", {
-                            style: "currency",
-                            currency: "INR",
-                          })}
-                        </span>
-                      </span>
-                    );
-                  }
-                  return null;
-                })()}
+                }
+                return null;
+              })()}
             </div>
           )}
         </div>
