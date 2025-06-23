@@ -10,7 +10,7 @@ function BlogDetail() {
     const getBlog = async () => {
         try {
             const { data } = await axios.get(
-                `http://localhost:8080/api/v1/blog/get-blog/${slug}`
+                `https://vm-b.onrender.com/api/v1/blog/get-blog/${slug}`
             );
             if (data.success) {
                 setBlog(data.blog);
